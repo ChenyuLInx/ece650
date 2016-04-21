@@ -70,12 +70,12 @@ void query1(MYSQL *conn,
   char input[512] = "SELECT * FROM PLAYER WHERE ";
   if(use_mpg != 0){
     char tmp[100];
-    sprintf(tmp,"MPG>=%d AND MPG=<%d ",min_mpg,max_mpg);
+    sprintf(tmp,"MPG>=%d AND MPG<=%d ",min_mpg,max_mpg);
     strcat(input,tmp);
   }
   if(use_ppg != 0){
     char tmp[100];
-    sprintf(tmp,"PPG>=%d AND PPG=<%d ",min_ppg,max_ppg);
+    sprintf(tmp,"PPG>=%d AND PPG<=%d ",min_ppg,max_ppg);
     if(use_mpg !=0){
       strcat(input,"AND ");
     }
@@ -124,19 +124,24 @@ void query1(MYSQL *conn,
   int num_fields = mysql_num_fields(result);
   MYSQL_ROW row;
   MYSQL_FIELD *field;
+  while (field = mysql_fetch_field(result)) {
+    printf("%s ", field->name);
+  }
+  printf("\n");
+
   while ((row = mysql_fetch_row(result))){
     for(int i = 0; i < num_fields; i++){
-      if (i == 0) {
+      /* if (i == 0) {
         while (field = mysql_fetch_field(result)) {
           printf("%s ", field->name);
         }
         printf("\n");
-      }
+	}*/
       printf("%s ", row[i] ? row[i] : "NULL");
     }
+    printf("\n");
   }
   mysql_free_result(result);
-  printf("\n");
 }
 
 
@@ -163,19 +168,23 @@ void query2(MYSQL *conn, char *team_color)
     exit_with_error(conn);
   }
   int num_fields = mysql_num_fields(result);
+  while (field = mysql_fetch_field(result)) {
+    printf("%s ", field->name);
+  }
+  printf("\n");
   while ((row = mysql_fetch_row(result))){
     for(int i = 0; i < num_fields; i++){
-      if (i == 0) {
+      /*if (i == 0) {
         while (field = mysql_fetch_field(result)) {
           printf("%s ", field->name);
         }
         printf("\n");
-      }
+	}*/
       printf("%s ", row[i] ? row[i] : "NULL");
     }
+    printf("\n");
   }
   mysql_free_result(result);
-  printf("\n");
 
 }
 
@@ -203,19 +212,23 @@ void query3(MYSQL *conn, char *team_name)
     exit_with_error(conn);
   }
   int num_fields = mysql_num_fields(result);
+  while (field = mysql_fetch_field(result)) {
+    printf("%s ", field->name);
+  }
+  printf("\n");
   while ((row = mysql_fetch_row(result))){
     for(int i = 0; i < num_fields; i++){
-      if (i == 0) {
+      /*if (i == 0) {
         while (field = mysql_fetch_field(result)) {
           printf("%s ", field->name);
         }
         printf("\n");
-      }
+	}*/
       printf("%s ", row[i] ? row[i] : "NULL");
     }
+    printf("\n");
   }
   mysql_free_result(result);
-  printf("\n");
 }
 
 
@@ -233,19 +246,23 @@ void query4(MYSQL *conn, char *team_state, char *team_color)
   int num_fields = mysql_num_fields(result);
   MYSQL_ROW row;
   MYSQL_FIELD *field;
+  while (field = mysql_fetch_field(result)) {
+    printf("%s ", field->name);
+  }
+  printf("\n");
   while ((row = mysql_fetch_row(result))){
     for(int i = 0; i < num_fields; i++){
-      if (i == 0) {
+      /*if (i == 0) {
 	while (field = mysql_fetch_field(result)) {
 	  printf("%s ", field->name);
 	}
 	printf("\n");
-      }
+	}*/
       printf("%s ", row[i] ? row[i] : "NULL");
     }
+    printf("\n");
   }
   mysql_free_result(result);
-  printf("\n");
 }
 
 
@@ -262,17 +279,21 @@ void query5(MYSQL *conn, int num_wins){
   int num_fields = mysql_num_fields(result);
   MYSQL_ROW row;
   MYSQL_FIELD *field;
+  while (field = mysql_fetch_field(result)) {
+    printf("%s ", field->name);
+  }
+  printf("\n");
   while (row = mysql_fetch_row(result)) {
     for (int i=0; i < num_fields; i++) {
-      if (i == 0) {
+      /*if (i == 0) {
 	while (field = mysql_fetch_field(result)) {
 	  printf("%s ", field->name);
 	}
 	printf("\n");
-      }
+	}*/
       printf("%s ", row[i] ? row[i] : "NULL");
     }
+    printf("\n");
   }
   mysql_free_result(result);
-  printf("\n");
 }
